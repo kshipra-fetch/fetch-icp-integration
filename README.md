@@ -5,7 +5,7 @@ This project demonstrates a collaborative integration between Internet Computer 
 ## Project Structure
 
 ```
-dummy-bitcoin/
+fetch-icp-integration/
 ├── agent.py              # Fetch.ai agent implementation
 ├── private_keys.json     # Private keys for the agent
 └── btc-dummy/           # ICP canister implementation
@@ -13,6 +13,8 @@ dummy-bitcoin/
         └── backend/
             └── index.ts  # Dummy Bitcoin HTTP server
 ```
+
+
 
 ## ICP Component
 
@@ -26,6 +28,33 @@ The ICP component (`btc-dummy/src/backend/index.ts`) implements a dummy HTTP ser
 - `/dummy-test` - Test endpoint for basic connectivity
 
 Note: This is a dummy implementation that returns mock data. The actual implementation needs to be amended.
+
+
+To set up and run the ICP canister locally, follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/kshipra-fetch/fetch-icp-integration.git
+   cd fetch-icp-integration/btc-dummy
+   ```
+
+2. **Install all npm dependencies (including Azle):**
+   ```bash
+   npm install
+   ```
+
+3. **Start up a local ICP replica:**
+   ```bash
+   dfx start --clean
+   ```
+
+4. **In a separate terminal, deploy your canister:**
+   ```bash
+   dfx deploy
+   ```
+
+---
+
 
 ## Fetch.ai Component
 
@@ -46,7 +75,7 @@ pip install uagents
 
 ### Running the Agent
 
-1. Start the agent:
+1. In a separate terminal, start the agent:
 ```bash
 python3 agent.py
 ```
