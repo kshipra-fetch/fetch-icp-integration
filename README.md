@@ -88,23 +88,23 @@ INFO: [test-ICP-agent]: Agent inspector available at https://agentverse.ai/inspe
 ```
 
 3. Click on the Agent Inspector link to connect the agent with Agentverse via Mailbox
-![Mailbox connect](fetch-icp-integration/images/mailbox-connect.png)
+![Mailbox connect](images/mailbox-connect.png)
 
-![Mailbox options](fetch-icp-integration/images/mailbox-options.png)
+![Mailbox options](images/mailbox-options.png)
 
-![Mailbox done](fetch-icp-integration/images/mailbox-done.png)
+![Mailbox done](images/mailbox-done.png)
 
 
 
 4. Test the agent using the Chat interface with queries like:
    - Once connected, click on Agent Profile
-   ![Agent Profile](fetch-icp-integration/images/agent-profile.png)
+   ![Agent Profile](images/agent-profile.png)
 
    - Click on `Chat with Agent` to test the flow
-    ![Chat with Agent](fetch-icp-integration/images/chat-with-agent.png)
+    ![Chat with Agent](images/chat-with-agent.png)
 
    - Type in yyour queries in the UI
-    ![Type Query](fetch-icp-integration/images/chat-ui.png)
+    ![Type Query](images/chat-ui.png)
 
 
 
