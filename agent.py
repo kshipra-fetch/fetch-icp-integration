@@ -1,5 +1,4 @@
 import requests
-import openai
 import json
 from uagents_core.contrib.protocols.chat import (
     chat_protocol_spec,
@@ -12,11 +11,13 @@ from uagents import Agent, Context, Protocol
 from datetime import datetime, timezone, timedelta
 from uuid import uuid4
 
-
-
-
-
-openai.api_key = "YOUR_OPENAI_API_KEY"  # Replace with your key
+# ASI1 API settings
+ASI1_API_KEY = "YOUR_ASI1_API_KEY"  # Replace with your ASI1 key
+ASI1_BASE_URL = "https://api.asi1.ai/v1"
+ASI1_HEADERS = {
+    "Authorization": f"Bearer {ASI1_API_KEY}",
+    "Content-Type": "application/json"
+}
 
 CANISTER_ID = "bkyz2-fmaaa-aaaaa-qaaaq-cai"
 BASE_URL = "http://127.0.0.1:4943"
@@ -26,7 +27,7 @@ HEADERS = {
     "Content-Type": "application/json"
 }
 
-# Function definitions for OpenAI function calling
+# Function definitions for ASI1 function calling
 tools = [
     {
         "type": "function",
@@ -120,49 +121,80 @@ async def call_icp_endpoint(func_name: str, args: dict):
         response = requests.post(url, headers=HEADERS, json=args)
     else:
         raise ValueError(f"Unsupported function call: {func_name}")
-    
     response.raise_for_status()
     return response.json()
 
 async def process_query(query: str, ctx: Context) -> str:
     try:
-        # First test the dummy endpoint
-        try:
-            ctx.logger.info("Testing dummy endpoint...")
-            dummy_result = await call_icp_endpoint("get_current_fee_percentiles", {})
-            ctx.logger.info(f"Dummy endpoint response: {dummy_result}")
-        except requests.exceptions.RequestException as e:
-            ctx.logger.error(f"Failed to connect to the canister: {e}")
-            return "Failed to connect to the Bitcoin canister. Please try again later."
-
-        # Send to OpenAI for function call extraction
-        response = openai.chat.completions.create(
-            model="gpt-4o",
-            messages=[{"role": "user", "content": query}],
-            tools=tools,
-            tool_choice="auto"
+        # Step 1: Initial call to ASI1 with user query and tools
+        initial_message = {
+            "role": "user",
+            "content": query
+        }
+        payload = {
+            "model": "asi1-mini",
+            "messages": [initial_message],
+            "tools": tools,
+            "temperature": 0.7,
+            "max_tokens": 1024
+        }
+        response = requests.post(
+            f"{ASI1_BASE_URL}/chat/completions",
+            headers=ASI1_HEADERS,
+            json=payload
         )
+        response.raise_for_status()
+        response_json = response.json()
 
-        # Extract function calls from response
-        tool_calls = response.choices[0].message.tool_calls
+        # Step 2: Parse tool calls from response
+        tool_calls = response_json["choices"][0]["message"].get("tool_calls", [])
+        messages_history = [initial_message, response_json["choices"][0]["message"]]
+
         if not tool_calls:
             return "I couldn't determine what Bitcoin information you're looking for. Please try rephrasing your question."
 
-        # Process each function call
-        results = []
+        # Step 3: Execute tools and format results
         for tool_call in tool_calls:
-            func_name = tool_call.function.name
-            arguments = json.loads(tool_call.function.arguments)
-            
+            func_name = tool_call["function"]["name"]
+            arguments = json.loads(tool_call["function"]["arguments"])
+            tool_call_id = tool_call["id"]
+
             ctx.logger.info(f"Executing {func_name} with arguments: {arguments}")
-            
+
             try:
                 result = await call_icp_endpoint(func_name, arguments)
-                results.append(f"{func_name} result: {json.dumps(result, indent=2)}")
-            except requests.exceptions.RequestException as e:
-                results.append(f"Error executing {func_name}: {str(e)}")
+                content_to_send = json.dumps(result)
+            except Exception as e:
+                error_content = {
+                    "error": f"Tool execution failed: {str(e)}",
+                    "status": "failed"
+                }
+                content_to_send = json.dumps(error_content)
 
-        return "\n".join(results)
+            tool_result_message = {
+                "role": "tool",
+                "tool_call_id": tool_call_id,
+                "content": content_to_send
+            }
+            messages_history.append(tool_result_message)
+
+        # Step 4: Send results back to ASI1 for final answer
+        final_payload = {
+            "model": "asi1-mini",
+            "messages": messages_history,
+            "temperature": 0.7,
+            "max_tokens": 1024
+        }
+        final_response = requests.post(
+            f"{ASI1_BASE_URL}/chat/completions",
+            headers=ASI1_HEADERS,
+            json=final_payload
+        )
+        final_response.raise_for_status()
+        final_response_json = final_response.json()
+
+        # Step 5: Return the model's final answer
+        return final_response_json["choices"][0]["message"]["content"]
 
     except Exception as e:
         ctx.logger.error(f"Error processing query: {str(e)}")
@@ -244,7 +276,7 @@ Show me the latest fee percentile distribution.
 How much are the Bitcoin network fees right now?
 
 🧾 Queries for /get-p2pkh-address
-What is my canister’s P2PKH address?
+What is my canister's P2PKH address?
 
 Generate a Bitcoin address for me.
 

@@ -72,10 +72,25 @@ The Fetch.ai component (`agent.py`) implements an intelligent agent using the Ch
 pip install uagents
 ```
 
+### Get Your ASI:One API Key
+
+To use the agent, you need an ASI:One API Key. Follow these steps:
+
+1. Go to [https://asi1.ai/](https://asi1.ai/)
+2. Log in using your Google account or Fetch Wallet.
+3. Navigate to **Workbench**.
+4. Select **Developer** from the menu on the left.
+5. Click on **Create New** to generate a new API key.
+6. Copy the generated API key.
+7. Open `agent.py` and set your API key in the following line:
+   ```python
+   ASI1_API_KEY = "YOUR_ASI1_API_KEY"  # Replace with your ASI1 key
+   ```
 
 ### Running the Agent
 
 1. In a separate terminal, start the agent:
+
 ```bash
 python3 agent.py
 ```
