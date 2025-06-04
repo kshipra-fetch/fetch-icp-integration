@@ -1,4 +1,4 @@
-# Dummy Bitcoin Integration: ICP + Fetch.ai
+# Fetch.ai + ICP Integration: 
 
 This project demonstrates a collaborative integration between Internet Computer Protocol (ICP) and Fetch.ai, showcasing how to build a Bitcoin service using ICP canisters in the backend and Fetch.ai agents which can be queried via the AISI:One LLM. 
 
@@ -88,23 +88,23 @@ INFO: [test-ICP-agent]: Agent inspector available at https://agentverse.ai/inspe
 ```
 
 3. Click on the Agent Inspector link to connect the agent with Agentverse via Mailbox
-![Mailbox connect](dummy-bitcoin/images/mailbox-connect.png)
+![Mailbox connect](fetch-icp-integration/images/mailbox-connect.png)
 
-![Mailbox options](dummy-bitcoin/images/mailbox-options.png)
+![Mailbox options](fetch-icp-integration/images/mailbox-options.png)
 
-![Mailbox done](dummy-bitcoin/images/mailbox-done.png)
+![Mailbox done](fetch-icp-integration/images/mailbox-done.png)
 
 
 
 4. Test the agent using the Chat interface with queries like:
    - Once connected, click on Agent Profile
-   ![Agent Profile](dummy-bitcoin/images/agent-profile.png)
+   ![Agent Profile](fetch-icp-integration/images/agent-profile.png)
 
    - Click on `Chat with Agent` to test the flow
-    ![Chat with Agent](dummy-bitcoin/images/chat-with-agent.png)
+    ![Chat with Agent](fetch-icp-integration/images/chat-with-agent.png)
 
    - Type in yyour queries in the UI
-    ![Type Query](dummy-bitcoin/images/chat-ui.png)
+    ![Type Query](fetch-icp-integration/images/chat-ui.png)
 
 
 
