@@ -3,6 +3,9 @@ set -e
 
 echo "🚀 Setting up devcontainer..."
 
+# Fix for git dubious ownership issue in Codespaces
+git config --global --add safe.directory /workspaces/fetch-icp-integration
+
 # Install npm dependencies
 echo "📦 Installing npm dependencies..."
 cd ic && npm install
