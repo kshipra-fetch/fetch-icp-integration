@@ -6,19 +6,18 @@ This project demonstrates a collaborative integration between Internet Computer 
 
 ```
 fetch-icp-integration/
-├── agent.py              # Fetch.ai agent implementation
-├── private_keys.json     # Private keys for the agent
-└── btc-dummy/           # ICP canister implementation
+├── fetch                    # Fetch.ai agent implementation
+   ├── agent.py              # Fetch.ai agent implementation
+   └── private_keys.json     # Private keys for the agent
+└── ic/                      # ICP canister implementation
     └── src/
         └── backend/
-            └── index.ts  # Dummy Bitcoin HTTP server
+            └── index.ts     # Dummy Bitcoin HTTP server
 ```
-
-
 
 ## ICP Component
 
-The ICP component (`btc-dummy/src/backend/index.ts`) implements a dummy HTTP server with the following endpoints:
+The ICP component (`ic/src/backend/index.ts`) implements a dummy HTTP server with the following endpoints:
 
 - `/get-balance` - Returns dummy balance for a Bitcoin address
 - `/get-utxos` - Returns dummy UTXOs for a Bitcoin address
@@ -29,27 +28,24 @@ The ICP component (`btc-dummy/src/backend/index.ts`) implements a dummy HTTP ser
 
 Note: This is a dummy implementation that returns mock data. The actual implementation needs to be amended.
 
+---
+
+## IC Component
 
 To set up and run the ICP canister locally, follow these steps:
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/kshipra-fetch/fetch-icp-integration.git
-   cd fetch-icp-integration/btc-dummy
-   ```
+1. **Click "Use Template" and create your own repository**
 
-2. **Install all npm dependencies (including Azle):**
-   ```bash
-   npm install
-   ```
-
+2. **Open project as a VS Code Codespace**
+   
 3. **Start up a local ICP replica:**
    ```bash
-   dfx start --clean
+   dfx start
    ```
 
 4. **In a separate terminal, deploy your canister:**
    ```bash
+   cd ic
    dfx deploy
    ```
 

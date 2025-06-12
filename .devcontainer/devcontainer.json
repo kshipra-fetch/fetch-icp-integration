@@ -1,6 +1,6 @@
 {
   "name": "Fetch IC Dev Environment",
-  "image": "ghcr.io/dfinity/icp-dev-env:latest",
+  "image": "ghcr.io/dfinity/icp-dev-env-azle:latest",
   "forwardPorts": [4943, 5173, 11434],
   "portsAttributes": {
     "4943": {
