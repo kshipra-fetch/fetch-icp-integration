@@ -8,8 +8,8 @@
       "onAutoForward": "ignore"
     }
   },
-  "onCreateCommand": "chmod +x scripts/dev-container-setup.sh",
-  "postCreateCommand": "./scripts/dev-container-setup.sh",
+  "onCreateCommand": "chmod +x scripts/devcontainer-setup.sh",
+  "postCreateCommand": "./scripts/devcontainer-setup.sh",
   "customizations": {
     "vscode": {
       "extensions": [
