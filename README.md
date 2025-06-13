@@ -1,6 +1,6 @@
-# Fetch.ai + ICP Integration: 
+# Fetch.ai + ICP Integration:
 
-This project demonstrates a collaborative integration between Internet Computer Protocol (ICP) and Fetch.ai, showcasing how to build a Bitcoin service using ICP canisters in the backend and Fetch.ai agents which can be queried via the AISI:One LLM. 
+This project demonstrates a collaborative integration between Internet Computer Protocol (ICP) and Fetch.ai, showcasing how to build a Bitcoin service using ICP canisters in the backend and Fetch.ai agents which can be queried via the AISI:One LLM.
 
 ## Project Structure
 
@@ -37,20 +37,23 @@ To set up and run the ICP canister locally, follow these steps:
 1. **Click "Use Template" and create your own repository**
 
 2. **Open project as a VS Code Codespace**
-   
 3. **Start up a local ICP replica:**
+
    ```bash
    dfx start
    ```
 
 4. **In a separate terminal, deploy your canister:**
+
    ```bash
    cd ic
    dfx deploy
    ```
 
----
+5. **In the browser, open and interact with HTTP Server:**
+   - URL: http://{canister backend id}.raw.localhost:4943/ (see id from deploy message)
 
+---
 
 ## Fetch.ai Component
 
@@ -64,6 +67,7 @@ The Fetch.ai component (`agent.py`) implements an intelligent agent using the Ch
 - Supports various Bitcoin-related queries like checking balances, UTXOs, fees, and sending transactions
 
 ### Install uagents
+
 ```bash
 pip install uagents
 ```
@@ -99,43 +103,43 @@ INFO: [test-ICP-agent]: Agent inspector available at https://agentverse.ai/inspe
 ```
 
 3. Click on the Agent Inspector link to connect the agent with Agentverse via Mailbox
-![Mailbox connect](images/mailbox-connect.png)
+   ![Mailbox connect](images/mailbox-connect.png)
 
 ![Mailbox options](images/mailbox-options.png)
 
 ![Mailbox done](images/mailbox-done.png)
 
-
-
 4. Test the agent using the Chat interface with queries like:
+
    - Once connected, click on Agent Profile
-   ![Agent Profile](images/agent-profile.png)
+     ![Agent Profile](images/agent-profile.png)
 
    - Click on `Chat with Agent` to test the flow
-    ![Chat with Agent](images/chat-with-agent.png)
+     ![Chat with Agent](images/chat-with-agent.png)
 
    - Type in yyour queries in the UI
-    ![Type Query](images/chat-ui.png)
-
-
+     ![Type Query](images/chat-ui.png)
 
 ## Example Queries
 
 The agent supports various types of queries:
 
 ### Balance Queries
+
 - What's the balance of address tb1qexample1234567890?
 - Can you check how many bitcoins are in tb1qabcde000001234567?
 
 ### UTXO Queries
+
 - What UTXOs are available for address tb1qexampleutxo0001?
 - List unspent outputs for tb1qunspentoutputs111
 
 ### Fee Queries
+
 - What are the current Bitcoin fee percentiles?
 - Show me the latest fee percentile distribution
 
 ### Transaction Queries
+
 - Send 10,000 satoshis to tb1qreceiver000111
 - Transfer 50000 sats to tb1qsimplewalletabc
-
