@@ -86,7 +86,20 @@ To use the agent, you need an ASI:One API Key. Follow these steps:
    ```python
    ASI1_API_KEY = "YOUR_ASI1_API_KEY"  # Replace with your ASI1 key
    ```
+8. Copy the cannister ID after deploying and replace the cannister ID in the `agent.py` file. 
 
+   ```bash
+   Deployed canisters.
+   URLs:
+   Backend canister via Candid interface:
+   backend: http://127.0.0.1:4943/?canisterId=umunu-kh777-77774-qaaca-cai&id=uzt4z-lp777-77774-qaabq-cai
+   ```
+
+   ```python
+   CANISTER_ID = "uzt4z-lp777-77774-qaabq-cai"
+   BASE_URL = "http://127.0.0.1:4943"
+   ```
+9. 
 ### Running the Agent
 
 1. In a separate terminal, start the agent:
@@ -103,22 +116,25 @@ INFO: [test-ICP-agent]: Agent inspector available at https://agentverse.ai/inspe
 ```
 
 3. Click on the Agent Inspector link to connect the agent with Agentverse via Mailbox
-   ![Mailbox connect](images/mailbox-connect.png)
+   ![Mailbox connect](./fetch/images/mailbox-connect.png)
 
-![Mailbox options](images/mailbox-options.png)
+![Mailbox options](./fetch/images/mailbox-options.png)
 
-![Mailbox done](images/mailbox-done.png)
+![Mailbox done](./fetch/images/mailbox-done.png)
 
 4. Test the agent using the Chat interface with queries like:
 
    - Once connected, click on Agent Profile
-     ![Agent Profile](images/agent-profile.png)
+     ![Agent Profile](./fetch/images/agent-profile.png)
 
    - Click on `Chat with Agent` to test the flow
-     ![Chat with Agent](images/chat-with-agent.png)
+     ![Chat with Agent](./fetch/images/chat-with-agent.png)
 
-   - Type in yyour queries in the UI
-     ![Type Query](images/chat-ui.png)
+   - Type in your queries in the UI
+     ![Type Query](./fetch/images/chat-ui.png)
+
+   - Query through ASI:One
+      ![Type Query](./fetch/images/asi1.png)
 
 ## Example Queries
 
