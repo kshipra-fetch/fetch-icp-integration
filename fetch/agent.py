@@ -12,14 +12,14 @@ from datetime import datetime, timezone, timedelta
 from uuid import uuid4
 
 # ASI1 API settings
-ASI1_API_KEY = "YOUR_ASI1_API_KEY"  # Replace with your ASI1 key
+ASI1_API_KEY = "your_asi1_api_key"  # Replace with your ASI1 key
 ASI1_BASE_URL = "https://api.asi1.ai/v1"
 ASI1_HEADERS = {
     "Authorization": f"Bearer {ASI1_API_KEY}",
     "Content-Type": "application/json"
 }
 
-CANISTER_ID = "bkyz2-fmaaa-aaaaa-qaaaq-cai"
+CANISTER_ID = "uzt4z-lp777-77774-qaabq-cai"
 BASE_URL = "http://127.0.0.1:4943"
 
 HEADERS = {
